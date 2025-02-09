@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Registration Form</title>
+</head>
+
+<body>
+    <div class="style">
+    <h1>Registration Form</h1>
+
+    <form oninput="validateForm()">
+        <table>
+            <tr>
+                <td>Name:</label></td>
+                <td><input id="name" type="text" placeholder="Enter Your Name"></td>
+                <td><span id="nameError"></span></td>
+            </tr>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><input id="email" type="email" placeholder="Enter Your Email"></td>
+                <td><span id="emailError"></span></td>
+            </tr>
+            <tr>
+                <td><label></label>Password:</label></td>
+                <td><input id="password" type="password" placeholder="Enter Your Password"></td>
+                <td><span id="passwordError"></span></td>
+            </tr>
+        </table>
+        <button id="btn" disabled>Register</button>
+    </form>
+    </div>
+
+</body>
+
+</html>
+
+
+<style>
+    .style{
+        background-color: rgb(150, 111, 255);
+        padding-left: 650px;
+        margin: 10px;
+        border-radius: 20px;
+    }
+</style>
+
+
+
+
+<script>
+    function validateForm(){
+
+    //selecting all element values
+    var name=document.getElementById("name").value
+    var email=document.getElementById("email").value
+    var password=document.getElementById("password").value
+    
+    let nameError=""
+    if(name.trim()===""){
+        nameError="Name is required."
+    }
+
+    let emailError=""
+    var emailPattern=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+    if(email.trim()===""){
+        emailError="Email is required."
+    }else if(emailPattern.test(email)===false){
+        
+            emailError="Please enter a valid email address"
+    }
+
+    let passwordError=""
+    if(password.trim()===""){
+        passwordError="Password is required."
+    }else if(password.length<6){
+        passwordError="Password should have atleast 6 characters."
+
+    }
+
+    //update  error messages
+    document.getElementById("nameError").innerText=nameError
+    document.getElementById("emailError").innerText=emailError
+    document.getElementById("passwordError").innerText=passwordError
+
+    //Enabling register button
+    if(nameError==="" && emailError==="" && passwordError==="" ){
+        btn.disabled=false
+
+    }
+    else{
+        btn.disabled=true
+    }
+}
+</script>
